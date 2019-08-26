@@ -5,8 +5,47 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Valutaomregner"
         mc:Ignorable="d"
-        Title="MainWindow" Height="450" Width="800">
-    <Grid>
-        
+        Title="MainWindow" Height="250" Width="400">
+    <Grid Margin="15">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="300"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="0.5*"/>
+            <RowDefinition Height="140"/>
+            <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+
+
+        <StackPanel Grid.Column="1" Grid.Row="1" Margin="0 5">
+            <TextBlock Text="CurrencyConverter" VerticalAlignment="Center" HorizontalAlignment="Center"/>
+
+            <Grid >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="*"/>
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Grid.Column="0" Margin="5">
+                    <TextBlock Text="From"/>
+                    <TextBlock Text="DKK" Margin="0 3"/>
+                    <TextBox Margin="0 10"/>
+                </StackPanel>
+
+                <StackPanel Grid.Column="1" Margin="5">
+                    <TextBlock Text="To"/>
+                    <ComboBox x:Name="combo1"/>
+                    <TextBox Margin="0 10"/>
+                </StackPanel>
+            </Grid>
+
+            <Button VerticalAlignment="Top" Content="Converte" Margin="5 0"/>
+
+        </StackPanel>
+
+
+
     </Grid>
 </Window>

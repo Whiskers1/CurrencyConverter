@@ -12,6 +12,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using HtmlAgilityPack;
 
 namespace Valutaomregner
 {
@@ -23,6 +24,44 @@ namespace Valutaomregner
         public MainWindow()
         {
             InitializeComponent();
+
+            List<Valuta> valutas = new List<Valuta>();
+
+            var web = new HtmlWeb();
+            var document = web.Load(@"http://www.nationalbanken.dk/valutakurser");
+
+            var rows = document.DocumentNode.SelectNodes("//*[@id=\"currenciesTable\"]//tbody//tr");
+
+            if (rows != null && rows.Count > 0)
+            {
+                foreach (var row in rows)
+                {
+                    var name = row.SelectNodes(".//td[2]");
+                    var value = row.SelectNodes(".//td[3]");
+
+                    valutas.Add(new Valuta(name[0].InnerText, Convert.ToDouble(value[0].InnerText.Replace(',', '.'))));
+
+                }
+            }
+
+            foreach (var item in valutas)
+            {
+                combo1.Items.Add(item.Name);
+                combo1.SelectedIndex = 0;
+            }
+        }
+
+        public class Valuta
+        {
+            public Valuta(string name, double value)
+            {
+                this.Name = name;
+                this.Value = value;
+            }
+
+            public string Name { get; set; }
+
+            public double Value { get; set; }
         }
     }
 }
