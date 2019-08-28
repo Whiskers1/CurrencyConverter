@@ -30,13 +30,14 @@
 
                 <StackPanel Grid.Column="0" Margin="5">
                     <TextBlock Text="From"/>
-                    <TextBlock Text="DKK" Margin="4 3 0 3"/>
+                    <ComboBox x:Name="combo1"/>
+                    <!--<TextBlock Text="DKK" Margin="4 3 0 3"/>-->
                     <TextBox Margin="0 10" x:Name="TextBox_From"/>
                 </StackPanel>
 
                 <StackPanel Grid.Column="1" Margin="5">
                     <TextBlock Text="To"/>
-                    <ComboBox x:Name="combo1"/>
+                    <ComboBox x:Name="combo2"/>
                     <TextBox Margin="0 10" x:Name="TextBox_To"/>
                 </StackPanel>
             </Grid>
