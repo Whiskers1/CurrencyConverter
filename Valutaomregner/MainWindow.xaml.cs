@@ -21,11 +21,11 @@ namespace Valutaomregner
     /// </summary>
     public partial class MainWindow : Window
     {
+        List<Valuta> valutas = new List<Valuta>();
+
         public MainWindow()
         {
             InitializeComponent();
-
-            List<Valuta> valutas = new List<Valuta>();
 
             var web = new HtmlWeb();
             var document = web.Load(@"http://www.nationalbanken.dk/valutakurser");
@@ -40,15 +40,15 @@ namespace Valutaomregner
                     var value = row.SelectNodes(".//td[3]");
 
                     valutas.Add(new Valuta(name[0].InnerText, Convert.ToDouble(value[0].InnerText.Replace(',', '.'))));
-
                 }
             }
 
             foreach (var item in valutas)
             {
                 combo1.Items.Add(item.Name);
-                combo1.SelectedIndex = 0;
+                
             }
+            combo1.SelectedIndex = 0;
         }
 
         public class Valuta
@@ -62,6 +62,22 @@ namespace Valutaomregner
             public string Name { get; set; }
 
             public double Value { get; set; }
+        }
+
+        private void Converte_Click(object sender, RoutedEventArgs e)
+        {
+
+            if (!String.IsNullOrEmpty(TextBox_From.Text))
+            {
+
+                double from = Convert.ToDouble(TextBox_From.Text.Replace(',', '.'));
+
+                double kurs = valutas[combo1.SelectedIndex].Value;
+
+                double To = Math.Round(((from * 100) / kurs), 2);
+
+                TextBox_To.Text = Convert.ToString(To).Replace('.', ',');
+            }
         }
     }
 }
