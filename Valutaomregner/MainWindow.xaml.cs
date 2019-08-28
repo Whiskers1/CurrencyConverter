@@ -30,7 +30,7 @@ namespace Valutaomregner
         {
             InitializeComponent();
 
-            valutas.Add(new Valuta("DKK", 100));
+            valutas.Add(new Valuta("Danske kroner", "DKK", 100));
 
             var web = new HtmlWeb();
             var document = web.Load(@"http://www.nationalbanken.dk/valutakurser");
@@ -41,17 +41,18 @@ namespace Valutaomregner
             {
                 foreach (var row in rows)
                 {
-                    var name = row.SelectNodes(".//td[2]");
+                    var name = row.SelectNodes(".//td[1]");
+                    var nameShort = row.SelectNodes(".//td[2]");
                     var value = row.SelectNodes(".//td[3]");
 
-                    valutas.Add(new Valuta(name[0].InnerText, Convert.ToDouble(value[0].InnerText.Replace(',', '.'))));
+                    valutas.Add(new Valuta(name[0].InnerText, nameShort[0].InnerText, Convert.ToDouble(value[0].InnerText.Replace(',', '.'))));
                 }
             }
 
             foreach (var item in valutas)
             {
-                combo1.Items.Add(item.Name);
-                combo2.Items.Add(item.Name);
+                combo1.Items.Add(item.Name + " - " + item.NameShort);
+                combo2.Items.Add(item.Name + " - " + item.NameShort);
             }
             combo1.SelectedIndex = 0;
             combo2.SelectedIndex = 1;
@@ -62,13 +63,16 @@ namespace Valutaomregner
         /// </summary>
         public class Valuta
         {
-            public Valuta(string name, double value)
+            public Valuta(string name, string nameShort, double value)
             {
                 this.Name = name;
+                this.NameShort = nameShort;
                 this.Value = value;
             }
 
             public string Name { get; set; }
+
+            public string NameShort { get; set; }
 
             public double Value { get; set; }
         }

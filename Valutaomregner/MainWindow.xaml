@@ -5,12 +5,12 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:Valutaomregner"
         mc:Ignorable="d"
-        Title="CurrencyConverter" Height="250" Width="400" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
+        Title="CurrencyConverter" Height="250" Width="450" WindowStartupLocation="CenterScreen" ResizeMode="NoResize">
     <Grid Margin="15">
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0.5*"/>
-            <ColumnDefinition Width="300"/>
-            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="0.25*"/>
+            <ColumnDefinition Width="350"/>
+            <ColumnDefinition Width="0.25*"/>
         </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
             <RowDefinition Height="0.5*"/>
